@@ -15,6 +15,8 @@ recommended
 
 - Bracket Pair Colorizer
 - Guides
+- vscode-icons
+- GitLens
 
 ### .vscode/settings.json
 
@@ -38,6 +40,20 @@ recommended
   "eslint.autoFixOnSave": true,
   "editor.formatOnSave": true
 }
+```
+
+## vue-cli install
+
+### remove old version
+
+```
+npm uninstall vue-cli -g
+```
+
+### install
+
+```
+npm install -g @vue/cli
 ```
 
 ## Project setup
