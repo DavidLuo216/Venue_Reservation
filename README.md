@@ -22,6 +22,13 @@ recommended
 
 ```json
 {
+  "vetur.format.defaultFormatter.html": "js-beautify-html",
+  //js-beautify-html格式化配置，属性强制换行
+  "vetur.format.defaultFormatterOptions": {
+    "js-beautify-html": {
+      "wrap_attributes": "force-aligned"
+    }
+  },
   "vetur.validation.template": false,
   "eslint.validate": [
     {

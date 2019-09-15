@@ -1,4 +1,5 @@
 module.exports = {
-    singleQuote: true,
-    semi: false
+  eslintIntergration: true,
+  singleQuote: true,
+  semi: false
 }
