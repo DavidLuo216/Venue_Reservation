@@ -17,7 +17,7 @@
             <News></News>
           </el-col>
           <el-col :span="12">
-            <Comment></Comment>
+            <Comment v-bind:comments = "['1','2','3','4']"></Comment>
           </el-col>
         </el-row>
       </el-main>

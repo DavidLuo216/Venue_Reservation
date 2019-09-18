@@ -1,10 +1,19 @@
 <template>
-  <div @mouseenter="touch = true" @mouseleave="touch = false" class = "commentmode.textcontainterclass">    
-    <transition class = "commentmode.class" name = "slide" mode="out-in">
-    <p >
-      {{text.val}}
-    </p>
-  </transition>
+  <div
+    @mouseenter="touch = true"
+    @mouseleave="touch = false"
+    :style="commentmode.textcontainterclass"
+  >
+
+    <transition :style="commentmode.class" name="slide" mode="out-in">
+      <p style="margin-bottom:20px " :key="text.id">{{text.val}}</p>
+    </transition>
+    <transition :style="commentmode.class" name="slide" mode="out-in">
+      <p style="margin-bottom:20px" :key="text.id">{{text.val1}}</p>
+    </transition>
+    <transition :style="commentmode.class" name="slide" mode="out-in">
+      <p style="margin-bottom:20px" :key="text.id">{{text.val2}}</p>
+    </transition>
   </div>
 </template>
 <!--
@@ -21,36 +30,58 @@ text-container {
 export default {
   name: 'Comment',
   data() {
-    return{
-    show : true,
-    index: 0,
-    touch: false,
-    totaltime: 0
+    return {
+      show: true,
+      index: 0,
+      touch: false,
+      totaltime: 0
     }
   },
-  props:['comments','commentmode'],
-  methods: {
-    startMove(){
-      setTimeout(()=>{
-        if(this.index === this.comments.length-1)
-        {
-          this.index  = 0
+  props: {
+    comments: {},
+    commentmode: {
+      default: function() {
+        return {
+          textcontainterclass: {
+            width: '500px',
+            height: '100px',
+            'line-height': '20px',
+            margin: '10px auto',
+            border: '1px solid cornflowerblue',
+            overflow: 'hidden'
+          },
+          class: {margin: '0px'},
+          translate: '20px'
         }
-        else{
+      }
+    }
+  },
+  methods: {
+    startMove() {
+      setTimeout(() => {
+        if (this.index === this.comments.length - 1) {
+          this.index = 0
+        } else {
           this.index++
         }
         this.startMove()
-      },this.commentmode.totaltime)
+      }, 2000)
     }
   },
-  created(){
+  created() {
     this.startMove()
-    document.documentElement.style.setProperty('--translatey',this.commentmode.translate)
+    document.documentElement.style.setProperty(
+      '--translatey',
+      this.commentmode.translate
+    )
   },
-  computed:{
-    text(){
-      return{
-        val: this.comments[this.index]
+  computed: {
+    text() {
+      return {
+        id: this.index,
+        val: this.comments[this.index],
+        val1: this.comments[(this.index + 1) % this.comments.length],
+        val2: this.comments[(this.index + 2) % this.comments.length]
       }
     }
   }
@@ -58,16 +89,18 @@ export default {
 </script>
 
 <style>
-:root{
-  --translatey:20px
+
+:root {
+  --translatey: 20px;
 }
-.slide-enter-active, .slide-leave-active {
+.slide-enter-active,
+.slide-leave-active {
   transition: all 0.5s linear;
 }
 .slide-leave-to {
-  transform: translateY(-var(--translatey));
+  transform: translateY(-20px);
 }
 .slide-enter {
-  transform: translateY(var(--translatey));
+  transform: translateY(20px);
 }
 </style>
