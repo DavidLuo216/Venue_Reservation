@@ -21,13 +21,13 @@ export default {
 
 <style>
 #sbox {
-  position: absolute;
-  bottom: 20%;
-  left: 30%;
+  padding: 1% 20%;
 }
 .home-search {
   background-color: #24292e;
   height: 100%;
   color: #fff;
+  display: flex;
+  flex-direction: column-reverse;
 }
 </style>
