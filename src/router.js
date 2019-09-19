@@ -22,6 +22,34 @@ export default new Router({
       component: function() {
         return import(/* webpackChunkName: "about" */ './views/About.vue')
       }
+    },
+    {
+      path:'/User',
+      name:'user',
+      component: function() {
+        return import('./views/user/InfoRoom.vue')
+      }
+    },
+    {
+      path:'/User/InfoRoom',
+      name:'userinfo',
+      component: function() {
+        return import('./views/user/InfoRoom.vue')
+      }
+    },
+    {
+      path:'/User/OrderRoom',
+      name:'userorder',
+      component: function() {
+        return import('./views/user/OrderRoom.vue')
+      }
+    },
+    {
+      path:'/User/CommentRoom',
+      name:'usercomment',
+      component: function() {
+        return import('./views/user/CommentRoom.vue')
+      }
     }
   ]
 })

@@ -1,21 +1,13 @@
 <template>
-  <el-form ref="loginForm"
-           :model="loginForm"
-           :rules="loginRules">
-    <el-form-item label="用户名"
-                  prop="username">
-      <el-input v-model="loginForm.username"
-                placeholder="Username"></el-input>
+  <el-form ref="loginForm" :model="loginForm" :rules="loginRules">
+    <el-form-item label="用户名" prop="username">
+      <el-input v-model="loginForm.username" placeholder="Username"></el-input>
     </el-form-item>
-    <el-form-item label="密码"
-                  prop="password">
-      <el-input v-model="loginForm.password"
-                placeholder="Password"
-                type="password"></el-input>
+    <el-form-item label="密码" prop="password">
+      <el-input v-model="loginForm.password" placeholder="Password" type="password"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary"
-                 @click="onSubmit">登录</el-button>
+      <el-button type="primary" @click="onSubmit">登录</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -65,7 +57,7 @@ export default {
               message: '登录成功！',
               type: 'success'
             })
-            this.$emit('login-result', loginstat)
+            this.$emit('login-success', loginstat)
             return true
           } else {
             this.$message({
@@ -85,7 +77,7 @@ export default {
       if (password.length < 6 || Number.isInteger(username)) {
         return false
       }
-      return true
+      return { username: username }
     }
   }
 }
