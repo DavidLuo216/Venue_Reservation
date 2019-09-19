@@ -17,7 +17,7 @@
             <News></News>
           </el-col>
           <el-col :span="12">
-            <Comment v-bind:comments = "['1','2','3','4']"></Comment>
+            <Comment v-bind:comments = "latestComments"></Comment>
           </el-col>
         </el-row>
       </el-main>
@@ -36,7 +36,12 @@ export default {
   name: 'home',
   data() {
     return {
-      searchHeight: '200px'
+      searchHeight: '200px',
+      latestComments:[
+        '良心网站！',
+        'Meet Here真好用！',
+        '图书馆研讨室的空调和座位都很舒服！电子设备也很赞！可惜太抢手，才刚能预约一会儿就被预约完了！'
+      ]
     }
   },
   components: {

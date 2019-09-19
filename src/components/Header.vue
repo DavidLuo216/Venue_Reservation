@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" style="padding: 0px 10px;">
-      <b-navbar-brand to="/">场馆预约系统</b-navbar-brand>
+      <b-navbar-brand to="/">MeetHere</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
@@ -17,7 +17,7 @@
             </b-modal>
           </b-nav-item>
           <b-nav-item right>
-            <b-button v-b-modal.register-modal variant="outline-light">注册</b-button>
+            <b-button v-show="!loginstatus" v-b-modal.register-modal variant="outline-light">注册</b-button>
             <b-modal id="register-modal" title="注册" hide-footer>
               <Register v-on:register-result="onRegisterSuccess"></Register>
             </b-modal>
@@ -41,9 +41,14 @@ export default {
     UserMenu
   },
   data() {
+    let token=localStorage.getItem('usercookie')
+    let loginstatus=false
+    if(!(token===null) ){
+      loginstatus=true
+    }
     return {
-      username: '',
-      loginstatus: false
+      username: token,
+      loginstatus: loginstatus
     }
   },
   computed:{
@@ -57,6 +62,7 @@ export default {
         this.$bvModal.hide('login-modal')
         this.username = result.username
         this.loginstatus = true
+        localStorage.setItem('usercookie',this.username)
       }
     },
     onRegisterSuccess(result) {
@@ -71,6 +77,7 @@ export default {
           message:'退出登录成功！',
           type:'warning'
         })
+        localStorage.removeItem('usercookie')
       }
     }
   }

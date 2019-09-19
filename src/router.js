@@ -4,7 +4,7 @@ import Home from './views/Home.vue'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -24,32 +24,49 @@ export default new Router({
       }
     },
     {
-      path:'/User',
-      name:'user',
+      path: '/User',
+      name: 'user',
       component: function() {
         return import('./views/user/InfoRoom.vue')
       }
     },
     {
-      path:'/User/InfoRoom',
-      name:'userinfo',
+      path: '/User/InfoRoom',
+      name: 'userinfo',
       component: function() {
         return import('./views/user/InfoRoom.vue')
       }
     },
     {
-      path:'/User/OrderRoom',
-      name:'userorder',
+      path: '/User/OrderRoom',
+      name: 'userorder',
       component: function() {
         return import('./views/user/OrderRoom.vue')
       }
     },
     {
-      path:'/User/CommentRoom',
-      name:'usercomment',
+      path: '/User/CommentRoom',
+      name: 'usercomment',
       component: function() {
         return import('./views/user/CommentRoom.vue')
       }
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  console.log(`jumpto ${to.toString()} from ${from.toString()}`)
+  if (to.path === '/') {
+    next()
+  } else if (to.path.startsWith('/User')) {
+    let token = localStorage.getItem('usercookie')
+    if (token === 'null' || token === '' || !token) {
+      alert('请先登录！')
+      next('/')
+    } else {
+      next()
+    }
+  }
+})
+
+export default router

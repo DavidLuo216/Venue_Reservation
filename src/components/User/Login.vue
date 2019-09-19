@@ -1,15 +1,17 @@
 <template>
-  <el-form ref="loginForm" :model="loginForm" :rules="loginRules">
-    <el-form-item label="用户名" prop="username">
-      <el-input v-model="loginForm.username" placeholder="Username"></el-input>
-    </el-form-item>
-    <el-form-item label="密码" prop="password">
-      <el-input v-model="loginForm.password" placeholder="Password" type="password"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="onSubmit">登录</el-button>
-    </el-form-item>
-  </el-form>
+  <div v-on:keyup.enter="onSubmit">
+    <el-form ref="loginForm" :model="loginForm" :rules="loginRules">
+      <el-form-item label="用户名" prop="username">
+        <el-input v-model="loginForm.username" placeholder="Username"></el-input>
+      </el-form-item>
+      <el-form-item label="密码" prop="password">
+        <el-input v-model="loginForm.password" placeholder="Password" type="password"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="onSubmit">登录</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
 </template>
 
 <script>

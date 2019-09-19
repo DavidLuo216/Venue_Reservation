@@ -1,7 +1,10 @@
 <template>
   <div>
-    <p>VenuePicturesRollingHere</p>
-    <img :src="img" />
+    <el-carousel interval="5000" type="card" height="300px">
+      <el-carousel-item v-for="i in imgs.length" :key="i">
+        <el-image :src="imgs[i-1]" fit="contain"></el-image>
+      </el-carousel-item>
+    </el-carousel>
   </div>
 </template>
 
@@ -9,8 +12,10 @@
 export default {
   name: 'VenuePic',
   data() {
+    let img1= require('../../assets/logo.png')
+    let img2= require('../../assets/hpc26.png')
     return {
-      img: require('../../assets/hpc26.png')
+      imgs: [img1, img2, img1, img2]
     }
   }
 }

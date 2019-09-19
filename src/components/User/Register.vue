@@ -1,4 +1,5 @@
 <template>
+<div v-on:keyup.enter="onSubmit">
   <el-form ref="registerForm"
            :model="registerForm"
            :rules="registerRules">
@@ -23,6 +24,7 @@
                  @click="onSubmit">注册</el-button>
     </el-form-item>
   </el-form>
+</div>
 </template>
 
 <script>
