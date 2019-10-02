@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header style="padding: 0"
-                 height="54px">
+      <el-header style="padding: 0">
         <Header></Header>
       </el-header>
       <el-main style="padding: 0">
@@ -13,7 +12,8 @@
 </template>
 
 <script>
-import Header from '@/components/Header.vue'
+// import Header from '@/components/Header.vue'
+import Header from '@/components/ELHeader.vue'
 export default {
   name: 'app',
   components: {

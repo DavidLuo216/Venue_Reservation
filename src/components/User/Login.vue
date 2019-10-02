@@ -2,13 +2,13 @@
   <div v-on:keyup.enter="onSubmit">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules">
       <el-form-item label="用户名" prop="username">
-        <el-input v-model="loginForm.username" placeholder="Username"></el-input>
+        <el-input v-model="loginForm.username" placeholder="Username" prefix-icon="el-icon-user"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input v-model="loginForm.password" placeholder="Password" type="password"></el-input>
+        <el-input v-model="loginForm.password" placeholder="Password" type="password" prefix-icon="el-icon-lock"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">登录</el-button>
+        <el-button type="primary" @click="onSubmit" icon="el-icon-s-promotion" round>登录</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -53,13 +53,13 @@ export default {
     onSubmit() {
       this.$refs['loginForm'].validate(valid => {
         if (valid) {
-          var loginstat = this.validatePassword(this.loginForm)
-          if (loginstat) {
+          var loginResult = this.validatePassword(this.loginForm)
+          if (loginResult) {
             this.$message({
               message: '登录成功！',
               type: 'success'
             })
-            this.$emit('login-success', loginstat)
+            this.$emit('login-success', loginResult)
             return true
           } else {
             this.$message({

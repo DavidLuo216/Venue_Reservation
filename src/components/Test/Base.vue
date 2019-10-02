@@ -1,9 +1,17 @@
 <template>
-  <div></div>
+  <div>
+    <ELHeader></ELHeader>
+  </div>
 </template>
 
 <script>
-export default {}
+import ELHeader from '@/components/ELHeader.vue'
+export default {
+  name:'Base',
+  components:{
+    ELHeader,
+  }
+}
 </script>
 
 <style>

@@ -25,32 +25,41 @@ const router = new Router({
     },
     {
       path: '/User',
-      name: 'user',
+      // name: 'user',
       component: function() {
-        return import('./views/user/InfoRoom.vue')
-      }
+        return import('./views/user/Base.vue')
+      },
+      children:[
+        {
+          path: 'InfoRoom',
+          // name: 'userinfo',
+          component: function() {
+            return import('./views/user/InfoRoom.vue')
+          }
+        },
+        {
+          path: 'OrderRoom',
+          // name: 'userorder',
+          component: function() {
+            return import('./views/user/OrderRoom.vue')
+          }
+        },
+        {
+          path: 'CommentRoom',
+          // name: 'usercomment',
+          component: function() {
+            return import('./views/user/CommentRoom.vue')
+          }
+        },
+      ]
     },
     {
-      path: '/User/InfoRoom',
-      name: 'userinfo',
+      path: '/testpage',
+      name: 'testpage',
       component: function() {
-        return import('./views/user/InfoRoom.vue')
+        return import('./components/Test/Base.vue')
       }
     },
-    {
-      path: '/User/OrderRoom',
-      name: 'userorder',
-      component: function() {
-        return import('./views/user/OrderRoom.vue')
-      }
-    },
-    {
-      path: '/User/CommentRoom',
-      name: 'usercomment',
-      component: function() {
-        return import('./views/user/CommentRoom.vue')
-      }
-    }
   ]
 })
 
@@ -66,6 +75,8 @@ router.beforeEach((to, from, next) => {
     } else {
       next()
     }
+  }else{
+    next()
   }
 })
 
