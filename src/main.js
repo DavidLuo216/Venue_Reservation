@@ -10,13 +10,24 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-import VueScrollmagic from 'vue-scrollmagic'
+//import VueScrollmagic from 'vue-scrollmagic'
 
 Vue.config.productionTip = true
 
 Vue.use(ElementUI)
 Vue.use(BootstrapVue)
-Vue.use(VueScrollmagic)
+//Vue.use(VueScrollmagic)
+
+// Vue.directive('scroll', {
+//   inserted: function(el, binding) {
+//     let f = function(evt) {
+//       if (binding.value(evt, el)) {
+//         window.removeEventListener('scroll', f)
+//       }
+//     }
+//     window.addEventListener('scroll', f)
+//   }
+// })
 
 new Vue({
   router,

@@ -45,11 +45,13 @@
           backgroundColor: 'red'
         })
         var containerScene = new ScrollMagic.Scene({
-          triggerElement: '#container'
+          triggerElement: '#container',
+          duration: 400
         })
           .setTween(blockTween)
           .addIndicators()
           .addTo(controller)
+          .setPin('#')
       })
     </script>
   </body>

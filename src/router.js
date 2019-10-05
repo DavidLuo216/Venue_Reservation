@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import UserFacotry from './utils/userfactory.js'
-let uf=new UserFacotry()
+let uf = new UserFacotry()
 
 Vue.use(Router)
 
@@ -16,43 +16,61 @@ const router = new Router({
       component: Home
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      path: '/venues',
+      name: 'venues',
       component: function() {
-        return import(/* webpackChunkName: "about" */ './views/About.vue')
+        return import('./views/Venues.vue')
       }
     },
     {
-      path: '/User',
-      // name: 'user',
+      path: '/news',
+      name: 'news',
+      component: function() {
+        return import('./views/News.vue')
+      }
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: function() {
+        return import('./views/Search.vue')
+      }
+    },
+    {
+      path: '/comments',
+      name: 'comments',
+      component: function() {
+        return import('./views/Comments.vue')
+      }
+    },
+    {
+      path: '/user',
+      name: 'user',
       component: function() {
         return import('./views/user/Base.vue')
       },
-      children:[
+      children: [
         {
-          path: 'InfoRoom',
-          // name: 'userinfo',
+          path: 'info-room',
+          name: 'user-info',
           component: function() {
             return import('./views/user/InfoRoom.vue')
           }
         },
         {
-          path: 'OrderRoom',
-          // name: 'userorder',
+          path: 'order-room',
+          name: 'user-order',
           component: function() {
             return import('./views/user/OrderRoom.vue')
           }
         },
         {
-          path: 'CommentRoom',
-          // name: 'usercomment',
+          path: 'comment-room',
+          name: 'user-comment',
           component: function() {
             return import('./views/user/CommentRoom.vue')
           }
-        },
+        }
       ]
     },
     {
@@ -61,7 +79,7 @@ const router = new Router({
       component: function() {
         return import('./components/Test/Base.vue')
       }
-    },
+    }
   ]
 })
 
@@ -76,7 +94,7 @@ router.beforeEach((to, from, next) => {
     } else {
       next()
     }
-  }else{
+  } else {
     next()
   }
 })

@@ -15,11 +15,13 @@ export default {
   name: 'VenuePic',
   data() {
     let img1 = require('../../assets/castle.jpg')
-    //let img2 = require('../../assets/hpc26.png')
+    let img2 = require('../../assets/sky-wheel.jpg')
     let img3 = require('../../assets/river.jpg')
     let img4 = require('../../assets/valley.jpg')
+    let img5 = require('../../assets/goose.jpg')
+    let img6 = require('../../assets/stone-river.jpg')
     return {
-      imgs: [img1, img3, img4]
+      imgs: [img1, img2, img3, img4, img5, img6]
     }
   }
 }

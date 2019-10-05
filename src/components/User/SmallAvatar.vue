@@ -1,7 +1,11 @@
 <template>
-  <el-avatar :size="40" fit="scale-down" :style="bg">
-    <el-image v-if="user.avatar" :src="user.avatar"></el-image>
-    <span v-else :style="fg">{{user.username[0]}}</span>
+  <el-avatar :size="40"
+             fit="scale-down"
+             :style="bg">
+    <el-image v-if="user&&user.avatar"
+              :src="user.avatar"></el-image>
+    <span v-else
+          :style="fg">{{(user&&user.username||'')[0]}}</span>
   </el-avatar>
 </template>
 
@@ -10,7 +14,6 @@ export default {
   name: 'SmallAvatar',
   props: {
     user: {
-      type: Object,
       required: true
     }
   },
@@ -30,7 +33,7 @@ export default {
     bg() {
       let color = 0
       let i = 0
-      let username = this.user.username
+      let username = (this.user && this.user.username) || ''
       for (; i < username.length; i++) {
         color += username.charCodeAt(i)
       }

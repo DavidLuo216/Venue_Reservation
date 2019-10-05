@@ -1,10 +1,12 @@
 <template>
   <div class="home">
     <el-container>
-      <el-header style="padding: 0"
-                 :height="searchHeight">
-        <Search id="home-search"></Search>
-      </el-header>
+      <!--<el-header style="padding: 0"
+                 :height="searchHeight"
+                 v-scroll="handleScroll">
+        <Search id="home-search"
+                :height="searchHeight"></Search>
+      </el-header> -->
       <el-main style="padding: 0">
         <el-row class="vp-row">
           <el-col>
@@ -27,7 +29,7 @@
 
 <script>
 // @ is an alias to /src
-import Search from '@/components/HomePage/Search.vue'
+//import Search from '@/components/HomePage/Search.vue'
 import VenuePic from '@/components/HomePage/VenuePic.vue'
 import News from '@/components/HomePage/News.vue'
 import Comment from '@/components/HomePage/Comment.vue'
@@ -38,7 +40,7 @@ export default {
   name: 'home',
   data() {
     return {
-      searchHeight: '800px',
+      //searchHeight: '400px',
       latestComments: [
         '良心网站！',
         'Meet Here真好用！',
@@ -47,30 +49,20 @@ export default {
     }
   },
   components: {
-    Search,
+    //Search,
     VenuePic,
     News,
     Comment
-  },
-  mounted() {
-    // Declare Scene
-    // const scene2 = this.$scrollmagic
-    //   .scene({
-    //     // ID of element where animation starts
-    //     triggerElement: '#home-search',
-    //     // {0,0.5,1} - animations starts from {top,center,end} of window
-    //     triggerHook: 0.5,
-    //     // Duration of animation
-    //     duration: 300
-    //   })
-    //   .setPin('#home-search')
-    //   // Helpful tags for orientation on the screen
-    //   .addIndicators({ name: '2 (duration: 300)' })
-    // // Add Scene to controller
-    // this.$scrollmagic.addScene(scene2)
-    // // Attaching scrollmagic controller to element
-    // this.$scrollmagic.attachTo(this.$refs.scrollBox)
   }
+  // methods: {
+  //   // eslint-disable-next-line
+  //   handleScroll: function(evt, el) {
+  //     //console.log('scrolled' + window.scrollY)
+  //     let tmp = 400 - window.scrollY
+  //     if (tmp <= 100) tmp = 100
+  //     this.searchHeight = tmp.toString() + 'px'
+  //   }
+  // }
 }
 </script>
 

@@ -1,32 +1,40 @@
 <template>
   <div class="comment-card">
-    <table>
-      <thead>
-        <tr>
-          <th>
-            <SmallAvatar :user="comment.user"></SmallAvatar>
-          </th>
-          <th>
-            <table>
-              <tr>{{comment.user.username}}</tr>
-              <tr>
-                <time :datetime="comment.time" :pubdate="comment.time">{{comment.time}}</time>
-              </tr>
-            </table>
-          </th>
-          <th>else</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>none</td>
-          <td>
-            <blockquote>{{comment.content}}</blockquote>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>likes</tfoot>
-    </table>
+    <el-card shadow="hover">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <SmallAvatar :user="comment.user"></SmallAvatar>
+            </th>
+            <th>
+              <table>
+                <tr>
+                  <td class="comment-username">
+                    {{comment.user.username}}
+                  </td>
+                </tr>
+                <tr>
+                  <time :datetime="comment.time"
+                        :pubdate="comment.time">{{comment.time}}</time>
+                </tr>
+              </table>
+            </th>
+            <th>else</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>none</td>
+            <td colspan="2"
+                class="comment-content">
+              <blockquote>{{comment.content}}</blockquote>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>likes</tfoot>
+      </table>
+    </el-card>
 
     <!-- <el-container direction="vertical">
       <el-header height="100px">
@@ -127,18 +135,22 @@ blockquote p {
   font-style: italic;
 }
 
-.el-header {
-  background-color: #00ff00;
-}
-.el-footer {
-  background-color: #ff0000;
+.comment-card {
+  text-align: left;
 }
 
-.el-aside {
-  background-color: #0000ff;
+.comment-content {
+  text-align: left;
+  width: 600px;
 }
 
-.el-main {
-  background-color: #333333;
+.comment-username {
+  text-align: left;
+  color: #ff6600;
+  font-weight: bold;
+}
+
+.el-card {
+  width: 700px;
 }
 </style>

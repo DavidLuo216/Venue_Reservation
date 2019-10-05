@@ -1,17 +1,31 @@
 <template>
-  <div
-    @mouseenter="touch = true"
-    @mouseleave="touch = false"
-    :style="commentmode.textcontainterclass"
-  >
-    <transition :style="commentmode.class" name="slide" mode="out-in">
-      <p style="margin-bottom:20px " :key="text.id" id="comment_p">{{text.val}}</p>
+  <div @mouseenter="touch = true"
+       @mouseleave="touch = false"
+       :style="commentmode.textcontainterclass">
+    <transition :style="commentmode.class"
+                name="slide"
+                mode="out-in">
+      <p style="margin-bottom:20px "
+         data-toggle="tooltip"
+         title="Example tooltip"
+         :key="text.id"
+         id="comment">{{text.val}}</p>
     </transition>
-    <transition :style="commentmode.class" name="slide" mode="out-in">
-      <p style="margin-bottom:20px" :key="text.id">{{text.val1}}</p>
+    <transition :style="commentmode.class"
+                name="slide"
+                mode="out-in">
+      <p style="margin-bottom:20px"
+         data-toggle="tooltip"
+         title="Example tooltip"
+         :key="text.id">{{text.val1}}</p>
     </transition>
-    <transition :style="commentmode.class" name="slide" mode="out-in">
-      <p style="margin-bottom:20px" :key="text.id">{{text.val2}}</p>
+    <transition :style="commentmode.class"
+                name="slide"
+                mode="out-in">
+      <p style="margin-bottom:20px"
+         data-toggle="tooltip"
+         title="Example tooltip"
+         :key="text.id">{{text.val2}}</p>
     </transition>
   </div>
 </template>
@@ -37,17 +51,19 @@ export default {
     }
   },
   props: {
-    comments: [],
+    comments: Array,
     commentmode: {
       default: function() {
         return {
           textcontainterclass: {
             width: '500px',
-            height: '100px',
+            height: '120px',
             'line-height': '20px',
             margin: '10px auto',
-            border: '1px solid cornflowerblue',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            'border-radius': '15px',
+            background: '#8AC007',
+            padding: '10px'
           },
           class: { margin: '0px' },
           translate: '20px'
@@ -59,7 +75,7 @@ export default {
     startMove() {
       setTimeout(() => {
         if (this.touch === false) {
-          if (this.index === this.comment.length - 1) {
+          if (this.index === this.comments.length - 1) {
             this.index = 0
           } else {
             this.index++
@@ -79,10 +95,12 @@ export default {
   computed: {
     comment() {
       var realcomments = []
-      var length = document.getElementById('comment_a').style.width / 20 - 5
-      for (var comment in this.comments) {
+      var length = parseInt(this.commentmode.textcontainterclass.width) / 20 - 5
+      for (let comment1 in this.comments) {
+        // realcomments.push(this.comments[comment1])
         realcomments.push(
-          comment.substring(0, length) + (comment.length > length ? '...' : '')
+          this.comments[comment1].substring(0, length) +
+            (this.comments[comment1].length >= length ? '...' : '')
         )
       }
       return {
@@ -92,9 +110,11 @@ export default {
     text() {
       return {
         id: this.index,
-        val: this.comment[this.index],
-        val1: this.comment[(this.index + 1) % this.comment.length],
-        val2: this.comment[(this.index + 2) % this.comment.length]
+        val: this.comment.realcomments[this.index],
+        val1: this.comment.realcomments[
+          (this.index + 1) % this.comments.length
+        ],
+        val2: this.comment.realcomments[(this.index + 2) % this.comments.length]
       }
     }
   }
