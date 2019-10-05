@@ -30,6 +30,10 @@
 </template>
 
 <script>
+import InputRule from '@/utils/inputrule.js'
+import UserFactory from '../../utils/userfactory'
+let userfactory=new UserFactory()
+let inputrule=new InputRule()
 export default {
   name: 'Register',
   data() {
@@ -46,68 +50,29 @@ export default {
         username: {
           required: true,
           validator: (rule, value, callback) => {
-            if (value === '') {
-              callback('请输入用户名')
-            } else {
-              callback()
-            }
+              inputrule.elFormValidator(value,inputrule.usernameValidator,callback)
           },
           trigger: 'blur'
         },
         password: {
           required: true,
           validator: (rule, value, callback) => {
-            if (value === '') {
-              callback('请输入密码')
-            } else if (value.length < 6) {
-              callback('密码长度必须大于6位')
-            } else {
-              callback()
-            }
+              inputrule.elFormValidator(value,inputrule.passwordValidator,callback)            
           },
           trigger: 'blur'
         },
         email: {
           required: true,
           validator: (rule, value, callback) => {
-            if (this._has_email_tel) {
-              callback()
-            } else if (value === '') {
-              this._has_email = false
-              callback('请输入邮箱')
-            } else {
-              let rex = new RegExp('^\\w+@(\\w)+(\\.(\\w)+)+$')
-              if (!rex.test(value)) {
-                this._has_email = false
-                callback('邮箱格式不正确')
-              } else {
-                callback()
-                this._has_email = true
-              }
-            }
+              inputrule.elFormValidator(value,inputrule.emailValidator,callback)
           },
           trigger: 'blur'
         },
         mobilephone: {
           required: true,
           validator: (rule, value, callback) => {
-            if (this._has_email_tel) {
-              callback()
-            } else if (value === '') {
-              this._has_phone = false
-              callback('请输入手机号')
-            } else {
-              let rex=new RegExp('(^\\d{11}$)|(^\\d{3,4}\\-\\d{8}$)')
-              if (!rex.test(value)){
-                this._has_phone = false
-                callback('手机号格式不正确')
-              }
-              else 
-              {
-                this._has_phone = true
-                callback()
-              }
-            }
+              inputrule.elFormValidator(value,inputrule.mobilephoneValidator,callback)     
+            
           },
           trigger: 'blur'
         }
@@ -154,7 +119,7 @@ export default {
           mobilephone:form.mobilephone,
           avatar:null,
         }
-        localStorage.setItem('usercookie',JSON.stringify(user))
+        userfactory.setUserCache(user)
         return user
       } else {
         return false

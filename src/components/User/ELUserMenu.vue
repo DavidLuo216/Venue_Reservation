@@ -25,6 +25,10 @@
         <i class="el-icon-switch-button"></i>
         <span style="color: #ff2200">退出登录</span>
       </el-menu-item>
+      <el-menu-item index="/testpage">
+        <i class="el-icon-info"></i>
+        <span style="color: #ffff00">开发中...</span>
+      </el-menu-item>
     </el-menu-item-group>
   </el-submenu>
 </template>

@@ -38,6 +38,11 @@ import Login from '@/components/User/Login.vue'
 import Register from '@/components/User/Register.vue'
 import ELUserMenu from '@/components/User/ELUserMenu.vue'
 
+import User from '../model/user.js'
+import UserFactory from '../utils/userfactory.js'
+
+let uf = new UserFactory()
+
 export default {
   name: 'ELHeader',
   components: {
@@ -47,13 +52,11 @@ export default {
     ELUserMenu
   },
   data() {
-    let token = localStorage.getItem('usercookie')
+    let user = uf.getCurrentUser()
     let loginstatus = false
-    if (!(token === null)) {
+    if (user) {
       loginstatus = true
     }
-    let user = JSON.parse(token)
-    console.log(JSON.stringify(token))
     return {
       user: user,
       loginstatus: loginstatus
@@ -69,7 +72,6 @@ export default {
         this.$bvModal.hide('login-modal')
         this.user = this.getUserProfile(result.username)
         this.loginstatus = true
-        localStorage.setItem('usercookie', JSON.stringify(this.user))
       }
     },
     onRegisterSuccess(result) {
@@ -86,17 +88,18 @@ export default {
           message: '退出登录成功！',
           type: 'warning'
         })
-        localStorage.removeItem('usercookie')
+        uf.clearUserCache()
         this.$router.push('/')
       }
     },
     getUserProfile(username) {
-      let user = {
-        username: username,
-        email: 'someone@example.com',
-        mobilephone: '10086100861',
-        avatar: null
+      let img = require('@/assets/logo.png')
+      let user = new User(username)
+      user.getProfile()
+      if (user.username === 'vue') {
+        user.avatar = img
       }
+      uf.setUserCache(user)
       return user
     }
   }
