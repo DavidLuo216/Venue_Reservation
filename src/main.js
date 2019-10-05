@@ -10,10 +10,13 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import VueScrollmagic from 'vue-scrollmagic'
+
 Vue.config.productionTip = true
 
 Vue.use(ElementUI)
 Vue.use(BootstrapVue)
+Vue.use(VueScrollmagic)
 
 new Vue({
   router,

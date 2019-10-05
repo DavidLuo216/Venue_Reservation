@@ -1,9 +1,13 @@
 <template>
   <div class="home-search">
-    <div id="sbox">
+    <div id="sbox"
+         @keydown.enter="onSearch">
       <el-input v-model="input"
                 prefix-icon="el-icon-search"
                 placeholder="请输入内容"></el-input>
+      <el-button type="primary"
+                 icon="el-icon-search"
+                 @click="onSearch"></el-button>
     </div>
   </div>
 </template>
@@ -15,6 +19,11 @@ export default {
     return {
       input: ''
     }
+  },
+  methods: {
+    onSearch() {
+      console.log('"' + this.input + '"searched!')
+    }
   }
 }
 </script>
@@ -22,6 +31,10 @@ export default {
 <style>
 #sbox {
   padding: 1% 20%;
+  display: flex;
+}
+#sbox .el-input {
+  margin-right: 1%;
 }
 .home-search {
   background-color: #24292e;

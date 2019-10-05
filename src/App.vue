@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header style="padding: 0" height="54px">
+      <el-header style="padding: 0">
         <Header></Header>
       </el-header>
       <el-main style="padding: 0">
@@ -12,7 +12,8 @@
 </template>
 
 <script>
-import Header from '@/components/Header.vue'
+// import Header from '@/components/Header.vue'
+import Header from '@/components/ELHeader.vue'
 export default {
   name: 'app',
   components: {
@@ -21,15 +22,14 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .el-header {
-  background-color: #b3c0d1;
+  background-color: #24292e;
   color: #333;
   text-align: center;
 }
 
 .el-main {
-  background-color: #e9eef3;
   color: #333;
   text-align: center;
   padding: 0;

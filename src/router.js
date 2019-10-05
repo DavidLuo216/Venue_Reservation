@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import UserFacotry from './utils/userfactory.js'
+let uf=new UserFacotry()
 
 Vue.use(Router)
 
@@ -25,32 +27,41 @@ const router = new Router({
     },
     {
       path: '/User',
-      name: 'user',
+      // name: 'user',
       component: function() {
-        return import('./views/user/InfoRoom.vue')
-      }
+        return import('./views/user/Base.vue')
+      },
+      children:[
+        {
+          path: 'InfoRoom',
+          // name: 'userinfo',
+          component: function() {
+            return import('./views/user/InfoRoom.vue')
+          }
+        },
+        {
+          path: 'OrderRoom',
+          // name: 'userorder',
+          component: function() {
+            return import('./views/user/OrderRoom.vue')
+          }
+        },
+        {
+          path: 'CommentRoom',
+          // name: 'usercomment',
+          component: function() {
+            return import('./views/user/CommentRoom.vue')
+          }
+        },
+      ]
     },
     {
-      path: '/User/InfoRoom',
-      name: 'userinfo',
+      path: '/testpage',
+      name: 'testpage',
       component: function() {
-        return import('./views/user/InfoRoom.vue')
+        return import('./components/Test/Base.vue')
       }
     },
-    {
-      path: '/User/OrderRoom',
-      name: 'userorder',
-      component: function() {
-        return import('./views/user/OrderRoom.vue')
-      }
-    },
-    {
-      path: '/User/CommentRoom',
-      name: 'usercomment',
-      component: function() {
-        return import('./views/user/CommentRoom.vue')
-      }
-    }
   ]
 })
 
@@ -59,13 +70,14 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/') {
     next()
   } else if (to.path.startsWith('/User')) {
-    let token = localStorage.getItem('usercookie')
-    if (token === 'null' || token === '' || !token) {
+    if (!uf.getCurrentUser()) {
       alert('请先登录！')
       next('/')
     } else {
       next()
     }
+  }else{
+    next()
   }
 })
 
