@@ -4,9 +4,8 @@
     @mouseleave="touch = false"
     :style="commentmode.textcontainterclass"
   >
-
     <transition :style="commentmode.class" name="slide" mode="out-in">
-      <p style="margin-bottom:20px " :key="text.id">{{text.val}}</p>
+      <p style="margin-bottom:20px " :key="text.id" id="comment_p">{{text.val}}</p>
     </transition>
     <transition :style="commentmode.class" name="slide" mode="out-in">
       <p style="margin-bottom:20px" :key="text.id">{{text.val1}}</p>
@@ -38,7 +37,7 @@ export default {
     }
   },
   props: {
-    comments: {},
+    comments: [],
     commentmode: {
       default: function() {
         return {
@@ -50,7 +49,7 @@ export default {
             border: '1px solid cornflowerblue',
             overflow: 'hidden'
           },
-          class: {margin: '0px'},
+          class: { margin: '0px' },
           translate: '20px'
         }
       }
@@ -59,10 +58,12 @@ export default {
   methods: {
     startMove() {
       setTimeout(() => {
-        if (this.index === this.comments.length - 1) {
-          this.index = 0
-        } else {
-          this.index++
+        if (this.touch === false) {
+          if (this.index === this.comment.length - 1) {
+            this.index = 0
+          } else {
+            this.index++
+          }
         }
         this.startMove()
       }, 2000)
@@ -76,12 +77,24 @@ export default {
     )
   },
   computed: {
+    comment() {
+      var realcomments = []
+      var length = document.getElementById('comment_a').style.width / 20 - 5
+      for (var comment in this.comments) {
+        realcomments.push(
+          comment.substring(0, length) + (comment.length > length ? '...' : '')
+        )
+      }
+      return {
+        realcomments
+      }
+    },
     text() {
       return {
         id: this.index,
-        val: this.comments[this.index],
-        val1: this.comments[(this.index + 1) % this.comments.length],
-        val2: this.comments[(this.index + 2) % this.comments.length]
+        val: this.comment[this.index],
+        val1: this.comment[(this.index + 1) % this.comment.length],
+        val2: this.comment[(this.index + 2) % this.comment.length]
       }
     }
   }
@@ -89,7 +102,6 @@ export default {
 </script>
 
 <style>
-
 :root {
   --translatey: 20px;
 }
